@@ -9,9 +9,7 @@ app.get("*", (req, res) => res.sendFile(path.join(__dirname, "/index.html")));
 
 app.get("/api/notes", (req, res) => res.JSON(path.join(__dirname, "/db.json")));
 
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-});
+
 
 app.post("/api/notes", (req, res) => {
     const {title, content } = req.body;
@@ -30,6 +28,9 @@ app.post("/api/notes", (req, res) => {
     })
     });
  
+    app.listen(PORT, () => {
+        console.log(`Server listening on port ${PORT}`);
+    });
     
     // Method to generate unique ID 
   //generateUniqueID() {
