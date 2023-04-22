@@ -21,11 +21,10 @@ app.post("/api/notes", (req, res) => {
             console.error(err);
             return res.status(500).send('Error adding that note');
         }
-
-        res.status(201).json(newNote);
-     
     });
- 
+    res.status(201).json(newNote);
+}
+
 app.listen(PORT, () => {
      console.log(`Server listening on port ${PORT}`);
  });
