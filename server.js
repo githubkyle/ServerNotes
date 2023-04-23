@@ -30,6 +30,4 @@ app.post("/api/notes", (req, res) => {
   res.status(201).json(newNoteWithId);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-});
+app.listen(process.env.PORT || 5000);
