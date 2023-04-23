@@ -2,17 +2,17 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 const PORT = 3009;
-const { v4: uuidv4 } = require("uuid");
+
 app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "/notes.html"))
 );
-app.get("*", (req, res) => res.sendFile(path.join(__dirname, "/index.html")));
+app.get("/*", (req, res) => res.sendFile(path.join(__dirname, "/index.html")));
 
 app.get("/api/notes", (req, res) => res.JSON(path.join(__dirname, "/db.json")));
 
 app.post("/api/notes", (req, res) => {
   const newNote = req.body;
-  const newNoteWithId = { ...newNote, id: uuidv4() };
+  const newNoteWithId = { ...newNote, id: Math.random() * 10000 };
 
   res.json(newNoteWithId);
 
