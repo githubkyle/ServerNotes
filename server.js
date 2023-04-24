@@ -2,15 +2,18 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 const PORT = 3009;
-
+const path = require("path");
 app.get("/notes", (req, res) =>
-  res.sendFile(path.join(__dirname, "/notes.html"))
+  res.sendFile(path.join(__dirname, "/public/notes.html"))
 );
 
-// app.get("/", (req, res) => res.sendFile(path.join(__dirname, "/index.html")));
-// app.get("*", (req, res) => res.sendFile(path.join(__dirname, "/index.html")));
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "/public/index.html"))
+);
 
-app.get("/api/notes", (req, res) => res.JSON(path.join(__dirname, "/db.json")));
+app.get("/api/notes", (req, res) =>
+  res.JSON(path.join(__dirname, "/Develop/db/db.json"))
+);
 
 app.post("/api/notes", (req, res) => {
   const newNote = req.body;
@@ -18,7 +21,7 @@ app.post("/api/notes", (req, res) => {
 
   // res.json(newNoteWithId);
 
-  var db = JSON.parse(fs.readFile("db.json"));
+  var db = JSON.parse(fs.readFile("/Develop/db/db.json"));
 
   db.push(newNoteWithId);
 
