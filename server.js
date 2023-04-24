@@ -16,11 +16,11 @@ app.post("/api/notes", (req, res) => {
   const newNote = req.body;
   const newNoteWithId = { ...newNote, id: Math.random() * 10000 };
 
-  res.json(newNoteWithId);
+  // res.json(newNoteWithId);
 
-  const db = JSON.parse(data);
+  var db = JSON.parse(fs.readFile("db.json"));
 
-  db.notes.push(newNoteWithId);
+  db.push(newNoteWithId);
 
   fs.writeFile("db.json", JSON.stringify(db), err => {
     if (err) {
