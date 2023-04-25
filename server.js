@@ -3,6 +3,7 @@ const app = express();
 const fs = require("fs");
 const PORT = 3009;
 const path = require("path");
+
 app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/notes.html"))
 );
@@ -19,11 +20,11 @@ app.post("/api/notes", (req, res) => {
   const newNote = req.body;
   const newNoteWithId = { ...newNote, id: Math.random() * 10000 };
 
-  // res.json(newNoteWithId);
-
   var db = JSON.parse(fs.readFile("/Develop/db/db.json"));
 
   db.push(newNoteWithId);
+
+  res.json(newNoteWithId);
 
   fs.writeFile("db.json", JSON.stringify(db), err => {
     if (err) {
@@ -35,4 +36,7 @@ app.post("/api/notes", (req, res) => {
   res.status(201).json(newNoteWithId);
 });
 
+app.delete("api/notes:id", id, (req, res) => {
+  var db = JSON.parse(fs.readFile("/Develop/db/db.json"));
+});
 app.listen(process.env.PORT || 5000);
