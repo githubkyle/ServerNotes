@@ -12,9 +12,7 @@ app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/index.html"))
 );
 
-app.get("/api/notes", (req, res) =>
-  res.JSON(path.join(__dirname, "/Develop/db/db.json"))
-);
+app.get("/api/notes", (req, res) => res.JSON("/Develop/db/db.json"));
 
 app.post("/api/notes", (req, res) => {
   const newNote = req.body;
@@ -36,7 +34,7 @@ app.post("/api/notes", (req, res) => {
   res.status(201).json(newNoteWithId);
 });
 
-app.delete("api/notes:id", id, (req, res) => {
-  var db = JSON.parse(fs.readFile("/Develop/db/db.json"));
-});
+// app.delete("api/notes:id", id, (req, res) => {
+//   var db = JSON.parse(fs.readFile("/Develop/db/db.json"));
+// });
 app.listen(process.env.PORT || 5000);
